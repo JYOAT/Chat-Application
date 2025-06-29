@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Loader2, Lock, MessageSquare } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, MessageSquare,User,Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern.jsx";
 import { useState } from "react";
@@ -30,7 +30,7 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const success = validateForm;
+    const success = validateForm();
     if (success === true) signup(formData);
   };
   return (

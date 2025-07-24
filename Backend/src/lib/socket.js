@@ -1,7 +1,6 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
-import path from "path";
 
 const app = express();
 const server = http.createServer(app);
@@ -33,13 +32,4 @@ io.on("connection", (socket) => {
         io.emit("getOnlineUsers", Object.keys(userSocketMap));
     })
 })
-
-// ✅ ADD THIS at the bottom of socket.js
-if (process.env.NODE_ENV === "production") {
-    const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, "../Frontend/Frontend/dist")));
-    app.get("/:catchAll(*)", (req, res) => {
-        res.sendFile(path.join(__dirname, "../Frontend/Frontend/dist/index.html"));
-    });
-}
 export { io, app, server };

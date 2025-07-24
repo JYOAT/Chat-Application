@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
+import path from "path";
 
 const app = express();
 const server = http.createServer(app);
@@ -33,26 +34,12 @@ io.on("connection", (socket) => {
     })
 })
 
-// io.on("connection", (socket) => {
-//     console.log("A user connected", socket.id);
-
-//     const rawUserId = socket.handshake.query.userId;
-
-//     if (!rawUserId || typeof rawUserId !== "string" || rawUserId.includes(":")) {
-//         console.warn("Invalid userId received from socket:", rawUserId);
-//         return;
-//     }
-
-//     const userId = rawUserId;
-//     userSocketMap[userId] = socket.id;
-
-//     io.emit("getOnlineUsers", Object.keys(userSocketMap));
-
-//     socket.on("disconnect", () => {
-//         console.log("A user disconnected", socket.id);
-//         delete userSocketMap[userId];
-//         io.emit("getOnlineUsers", Object.keys(userSocketMap));
-//     });
-// });
-
+// ✅ ADD THIS at the bottom of socket.js
+if (process.env.NODE_ENV === "production") {
+    const __dirname = path.resolve();
+    app.use(express.static(path.join(__dirname, "../../Frontend/Frontend/dist")));
+    app.get("/*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../../Frontend/Frontend/dist/index.html"));
+    });
+}
 export { io, app, server };

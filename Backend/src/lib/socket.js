@@ -37,9 +37,9 @@ io.on("connection", (socket) => {
 // ✅ ADD THIS at the bottom of socket.js
 if (process.env.NODE_ENV === "production") {
     const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, "../../Frontend/Frontend/dist")));
+    app.use(express.static(path.join(__dirname, "../Frontend/Frontend/dist")));
     app.get("/:catchAll(*)", (req, res) => {
-        res.sendFile(path.join(__dirname, "../../Frontend/Frontend/dist/index.html"));
+        res.sendFile(path.join(__dirname, "../Frontend/Frontend/dist/index.html"));
     });
 }
 export { io, app, server };

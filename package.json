@@ -2,6 +2,9 @@
   "name": "chat-app",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "build": "npm install --prefix Backend && npm install --prefix Frontend/Frontend && npm run build --prefix Frontend/Frontend",
     "start": "npm run start --prefix Backend"

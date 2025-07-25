@@ -29,10 +29,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../../Frontend/Frontend/dist")));
+    app.use(express.static(path.join(__dirname, "../Frontend/Frontend/dist")));
 
     app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../../Frontend/Frontend", "dist", "index.html"));
+        res.sendFile(path.join(__dirname, "../Frontend/Frontend", "dist", "index.html"));
     });
 }
 server.listen(PORT, () => {
